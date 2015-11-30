@@ -16,6 +16,7 @@ public class Book {
     private String author;
     private String image;
     private String description;
+    private double price;
 
     @Id
     @Column(name = "id")
@@ -103,5 +104,15 @@ public class Book {
         result = 31 * result + (image != null ? image.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "price")
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
