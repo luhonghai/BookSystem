@@ -8,6 +8,7 @@ import com.booksystem.utils.JNDILookUpClass;
 import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import java.util.List;
 
 /**
  * Created by longnguyen on 29/11/2015.
@@ -52,5 +53,13 @@ public class GalleryService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Gallery getGalleryById(int id){
+        return galleryDAO.findOne(id);
+    }
+
+    public List<Gallery> getAllGalleries(){
+        return (List<Gallery>)galleryDAO.findAll();
     }
 }

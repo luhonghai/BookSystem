@@ -7,6 +7,7 @@ import com.booksystem.utils.JNDILookUpClass;
 import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import java.util.List;
 
 /**
  * Created by longnguyen on 29/11/2015.
@@ -51,5 +52,13 @@ public class BlogService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Blog getBlogById(int id){
+        return blogDAO.findOne(id);
+    }
+
+    public List<Blog> getAllBlogs(){
+        return (List<Blog>)blogDAO.findAll();
     }
 }

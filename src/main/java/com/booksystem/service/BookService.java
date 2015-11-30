@@ -7,6 +7,7 @@ import com.booksystem.utils.JNDILookUpClass;
 import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import java.util.List;
 
 /**
  * Created by longnguyen on 29/11/2015.
@@ -51,5 +52,13 @@ public class BookService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Book getBookById(int id){
+        return bookDAO.findOne(id);
+    }
+
+    public List<Book> getAllBooks(){
+        return (List<Book>)bookDAO.findAll();
     }
 }
