@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 @Stateless(name="AdminEJB")
 public class AdminDAOImpl extends AbstractDAO<Admin, Integer> implements IAdminDAO{
 
-    protected AdminDAOImpl() {
+    public AdminDAOImpl() {
         super(Admin.class);
     }
 

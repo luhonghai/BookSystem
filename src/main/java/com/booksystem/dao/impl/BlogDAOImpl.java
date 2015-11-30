@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 @Stateless(name = "BlogEJB")
 public class BlogDAOImpl extends AbstractDAO<Blog, Integer> implements IBlogDAO {
 
-    protected BlogDAOImpl() {
+    public BlogDAOImpl() {
         super(Blog.class);
     }
 }

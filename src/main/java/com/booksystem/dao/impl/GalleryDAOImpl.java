@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 @Stateless(name = "GalleryEJB")
 public class GalleryDAOImpl extends AbstractDAO<Gallery, Integer> implements IGalleryDAO{
 
-    protected GalleryDAOImpl() {
+    public GalleryDAOImpl() {
         super(Gallery.class);
     }
 

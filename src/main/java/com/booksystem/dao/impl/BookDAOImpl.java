@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
  */
 @Stateless(name = "BookEJB")
 public class BookDAOImpl extends AbstractDAO<Book, Integer> implements IBookDAO {
-    protected BookDAOImpl() {
+    public BookDAOImpl() {
         super(Book.class);
     }
 }
