@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * Created by longnguyen on 29/11/2015.
  */
 @Entity
-public class Blog {
+public class Blog extends AbstractEntity{
     private int id;
     private String title;
     private String content;

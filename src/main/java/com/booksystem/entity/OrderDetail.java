@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "order_detail", schema = "", catalog = "book_system")
-public class OrderDetail {
+public class OrderDetail extends AbstractEntity{
     private int id;
     private int quantity;
     private double price;

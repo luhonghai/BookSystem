@@ -10,7 +10,7 @@ import javax.persistence.*;
         @NamedQuery(name = "Admin.Login", query = "select a from Admin a where a.username = :username and a.password = :password"),
         @NamedQuery(name = "Admin.FindAll", query = "select a from Admin a")
 })
-public class Admin {
+public class Admin extends AbstractEntity{
     private int id;
     private String username;
     private String password;

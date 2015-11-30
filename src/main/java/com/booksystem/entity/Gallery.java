@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * Created by longnguyen on 29/11/2015.
  */
 @Entity
-public class Gallery {
+public class Gallery extends AbstractEntity{
     private int id;
     private String image;
     private String description;

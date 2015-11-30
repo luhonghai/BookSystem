@@ -1,15 +1,16 @@
 package com.booksystem.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by longnguyen on 30/11/2015.
  */
 @Entity
-public class Customer {
+@NamedQueries({
+        @NamedQuery(name = "Customer.Login", query = "select c from Customer c where c.username = :username and c.password = :password"),
+        @NamedQuery(name = "Customer.FindAll", query = "select c from Customer c")
+})
+public class Customer extends AbstractEntity{
     private int id;
     private String username;
     private String password;
