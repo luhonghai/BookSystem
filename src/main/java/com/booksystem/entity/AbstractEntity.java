@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class AbstractEntity implements Serializable{
+public abstract class AbstractEntity implements Serializable, IAbstractEntity {
 
     public static final String FIND_ALL = "Entity.findAll";
 

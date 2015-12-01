@@ -2,6 +2,7 @@
 <%@page import="java.util.*"%>
 <%@page import="ac.gre.aircraft.dao.*"%>
 <%@page import="ac.gre.aircraft.dao.imp.*"%>
+<%@page import="ac.gre.aircraft.util.*"%>
 <%
 	Account acc = (Account)session.getAttribute("account");
 	if(acc == null){
@@ -17,6 +18,10 @@
 	List<Qualification> listQua = new ArrayList<Qualification>();
 	QualificationDao quaDao = new QualificationDaoImp();
 	listQua = quaDao.getAllQualifications();
+	
+	List<Job> listJob = new ArrayList<Job>();
+	JobDao jobDao = new JobDaoImp();
+	listJob = jobDao.getAllJobs();
 %>
 <%if(acc != null && acc.getUser_id() == 1){%>
 <html>
@@ -27,14 +32,14 @@
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/morris/morris.css" rel="stylesheet" type="text/css" />
-        <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-        <link href="css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-        <link href="css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-        <link href="css/iCheck/all.css" rel="stylesheet" type="text/css" />
-        <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link href="../css/morris/morris.css" rel="stylesheet" type="text/css" />
+        <link href="../css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <link href="../css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+        <link href="../css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />
+        <link href="../css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <link href="../css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <link href="../css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,11 +48,12 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
         <style>
-        	.btn-social{color:white !important;width:200px;float:right;margin-top:10px;margin-right:10px;}
-        	#addPopup{display:none;position:absolute;width:400px;top:150px;left:600px;z-index:3000;}
+        	.btn-social{color:white !important;width:150px;float:right;margin-top:10px;margin-right:10px;}
+        	#addPopup{display:none;position:absolute;width:400px;top:100px;left:600px;z-index:3000;}
         	.btn-flickr{background-color:#CD1F1F;}
         	.modal-backdrop{position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 2000;background-color: rgba(0, 0, 0, 0.5);}
-        	#tblQ td{vertical-align:middle;}
+        	.iCheck-helper{position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);}
+        	#tblJ td{vertical-align:middle;}
         </style>
     </head>
     <body class="skin-black fixed">
@@ -79,7 +85,7 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <img src="img/profile.jpg" class="img-circle" alt="User Image" />
+                                    <img src="../img/profile.jpg" class="img-circle" alt="User Image" />
                                     <%if(acc != null) {%>
                                     <p>
                                     	<%if(acc.getUser_id() == 1){
@@ -89,7 +95,7 @@
                                     	}%>
                                     	
                                         <%=accAndRole %>
-                                        <small>Member since Nov. 2012</small>
+                                        <small>Member since Nov. 2014</small>
                                     </p>
                                     <%} %>
                                 </li>
@@ -99,7 +105,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="logout.jsp" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="../logout.jsp" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -116,7 +122,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="img/profile.jpg" class="img-circle" alt="User Image" />
+                            <img src="../img/profile.jpg" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                         <%if(acc != null) {%>
@@ -138,7 +144,7 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li>
-                            <a href="index.jsp">
+                            <a href="../index.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -147,7 +153,7 @@
                                 <i class="fa fa-users"></i> <span>Engineer</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="job.jsp">
                                 <i class="fa fa-plane"></i> <span>Job</span>
                             </a>
@@ -157,7 +163,7 @@
                                 <i class="fa fa-fighter-jet"></i> <span>Job Allocate</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="qualification.jsp">
                                 <i class="fa fa-puzzle-piece"></i> <span>Qualification</span>
                             </a>
@@ -182,12 +188,12 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Qualification Management
+                        Job Management
                         <small>Control panel</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="index.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Qualification</li>
+                        <li><a href="../index.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Job</li>
                     </ol>
                 </section>
 				
@@ -197,26 +203,46 @@
                         <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">List of qualification</h3>
-                                    <a id="btnAdd" class="btn btn-block btn-social btn-github"><i class="fa fa-plus"></i>Add new qualification</a>
+                                    <h3 class="box-title">List of jobs</h3>
+                                    <a id="btnAdd" class="btn btn-block btn-social btn-github"><i class="fa fa-plus"></i>Add new job</a>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive scrollable-table">
-                                    <table id="tblQ" class="table table-bordered table-hover">
+                                    <table id="tblJ" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
+                                                <th style="display:none;">Id</th>
+                                                <th>Title</th>
+                                                <th>No of Engineers</th>
+                                                <th>Start date</th>
+                                                <th>End date</th>
+                                                <th>Required qualification</th>
+                                                <th>Status</th>
                                                 <th style="width:10%;"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%for(Qualification qua:listQua) {%>
-                                            	<tr id="row<%=qua.getQualification_id()%>">
-                                            		<td><%=qua.getQualification_id()%></td>
-                                            		<td><%=qua.getTitle() %></td>
+                                            <%for(Job j:listJob) {%>
+                                            	<tr id="row<%=j.getJob_id()%>">
+                                            		<td style="display:none;"><%=j.getJob_id() %></td>
+                                            		<td><a href="job_allocate.jsp?job_id=<%=j.getJob_id()%>"><%=j.getTitle() %></a></td>
+                                            		<td><%=j.getNo_engineer() %></td>
+                                            		<td><%=DateUtil.convertDateToString(j.getStart_date())%></td>
+                                            		<td><%=DateUtil.convertDateToString(j.getEnd_date())%></td>
+                                            		<td qua_id="<%=j.getQualification_id()%>">
+                                            			<%=quaDao.getQualificationById(j.getQualification_id()).getTitle() %>
+                                            		</td>
+                                            		<td status_id="<%=j.getStatus_id()%>" style="text-align:center;">
+                                            			<%if(j.getStatus_id() == 1){ %>
+                                            				<small class="label label-warning"><i class="fa fa-coffee"></i> Pending</small>
+                                            			<%}else if(j.getStatus_id() ==2){ %>
+                                            				<small class="label label-danger"><i class="fa fa-smile-o"></i> In Progress</small>
+                                            			<%}else{ %>
+                                            				<small class="label label-success"><i class="fa fa-check-circle-o"></i> Completed</small>
+                                            			<%} %>
+                                            		</td>
                                             		<td>
-                                            			<!-- <a class="btn btn-social-icon btn-flickr delQ"><i class="fa fa-trash-o"></i></a> -->
-                                            			<a class="btn btn-social-icon btn-dropbox editQ"><i class="fa fa-edit"></i></a>
+                                            			<a class="btn btn-social-icon btn-flickr delJ"><i class="fa fa-trash-o"></i></a>
+                                            			<a class="btn btn-social-icon btn-dropbox editJ"><i class="fa fa-edit"></i></a>
                                             		</td>
                                             	</tr>
                                             <%} %>
@@ -230,24 +256,60 @@
                     <div id="addPopup">
 						<div class="box box-solid bg-light-blue">
 				           <div class="box-header" data-toggle="tooltip">
-				                <h3 id="title_box" class="box-title">Qualification</h3>
+				                <h3 id="title_box" class="box-title">Add Information</h3>
 				                <div class="box-tools pull-right">
 				                     <button id="closePopup" class="btn btn-primary btn-xs"><i class="fa fa-times"></i></button>
 				                </div>
 				           </div>
 							<div class="box-body">
 								<div class="form-group">
-									<label>Name</label> <input type="text" class="form-control" id="txtName" placeholder="Enter name">
+									<label>Title</label> 
+									<input type="text" class="form-control" id="txtTitle" placeholder="Enter title">
 								</div>
+								<div class="form-group">
+									<label>Number of engineers required</label> 
+									<input type="number" class="form-control" id="txtNo" placeholder="Enter number">
+								</div>
+								<div class="form-group">
+									<label>Start Date</label> 
+									<input type="text" class="form-control" id="txtStartDate" title="Enter start date"/>
+								</div>
+								<div class="form-group">
+									<label>End Date</label> 
+									<input type="text" class="form-control" id="txtEndDate" title="End date must be greater than Start date"/>
+								</div>
+								<div class="form-group">
+									<label>Choose Qualification</label> 
+									<select class="form-control" id="txtQualification">
+										<%for(Qualification qa: listQua){ %>
+                                          <option value="<%=qa.getQualification_id()%>"><%=qa.getTitle()%></option>
+                                    	<%} %>
+                                    </select>
+								</div>
+								<div class="form-group">
+									<label>Status</label><br/>
+                                    <label>
+                                        <input type="radio" name="r3" class="flat-yellow" value="1" checked/>
+                                        <small class="label label-warning"><i class="fa fa-coffee"></i> Pending</small>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="r3" class="flat-yellow" value="2"/>
+                                        <small class="label label-danger"><i class="fa fa-smile-o"></i> In Progress</small>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="r3" class="flat-yellow" value="3"/>
+                                        <small class="label label-success"><i class="fa fa-check-circle-o"></i> Completed</small>
+                                    </label>
+                                    </div>
 							</div>
 							<!-- /.box-body -->
 							<div id="warningAlert" class="alert alert-warning alert-dismissable" style="margin-right:15px">
 								<button type="button" class="close">x</button>
-								<b>Please input name!</b>
+								<b>Please fill in the form!</b>
 							</div>
 							<div class="box-footer" style="border: 1px solid;border-color: #3c8dbc;">
-								<button id="submitQ" class="btn btn-primary">Submit</button>
-								<button id="resetQ" class="btn btn-danger">Reset</button>
+								<button id="submitJ" class="btn btn-primary">Submit</button>
+								<button id="resetJ" class="btn btn-danger">Reset</button>
 							</div>
 				        </div><!-- /.box -->
 			        </div>
@@ -255,30 +317,32 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
-        <!-- add new calendar event modal -->
-
-
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="js/plugins/morris/morris.min.js" type="text/javascript"></script>
-        <script src="js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-        <script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-        <script src="js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
-        <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-        <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-        <script src="js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/morris/morris.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+        <script src="../js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+        <script src="../js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <script src="../js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        
+        <!-- InputMask -->
+        <script src="../js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+        <script src="../js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+        <script src="../js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
         
         <!-- DATA TABES SCRIPT -->
-        <script src="js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+        <script src="../js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
 
         <!-- AdminLTE App -->
-        <script src="js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="js/qualification.js" type="text/javascript"></script>
+        <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
+        <script src="../js/job.js" type="text/javascript"></script>
     </body>
 </html>
 <%}else{

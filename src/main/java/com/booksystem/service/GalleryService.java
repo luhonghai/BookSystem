@@ -1,65 +1,17 @@
 package com.booksystem.service;
 
-import com.booksystem.dao.IBlogDAO;
 import com.booksystem.dao.IGalleryDAO;
 import com.booksystem.entity.Gallery;
-import com.booksystem.utils.JNDILookUpClass;
 
-import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import java.util.List;
+import javax.ws.rs.Path;
 
 /**
  * Created by longnguyen on 29/11/2015.
  */
-public class GalleryService {
-    @EJB
-    private IGalleryDAO galleryDAO;
+@Path("gallery")
+public class GalleryService extends BaseService<IGalleryDAO, Gallery> {
 
-    public GalleryService(){
-        Context context = null;
-        try {
-            context = JNDILookUpClass.getInitialContext();
-            String name = JNDILookUpClass.lookUpName(IGalleryDAO.class.getName(), "GalleryDAO");
-            galleryDAO = (IGalleryDAO)context.lookup(name);
-
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Gallery addGallery(Gallery g){
-        try {
-            galleryDAO.save(g);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return g;
-    }
-
-    public Gallery updateGallery(Gallery g){
-        try {
-            galleryDAO.update(g);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return g;
-    }
-
-    public void deleteGalleryById(int id){
-        try {
-            galleryDAO.deleteById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Gallery getGalleryById(int id){
-        return galleryDAO.findOne(id);
-    }
-
-    public List<Gallery> getAllGalleries(){
-        return (List<Gallery>)galleryDAO.findAll();
+    public GalleryService() {
+        super(IGalleryDAO.class, Gallery.class, "GalleryEJB");
     }
 }

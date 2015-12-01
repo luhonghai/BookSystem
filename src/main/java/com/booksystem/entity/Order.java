@@ -10,7 +10,7 @@ import java.sql.Date;
  * Created by longnguyen on 30/11/2015.
  */
 @Entity
-public class Order extends AbstractEntity{
+public class Order extends AbstractEntity {
     private int id;
     private Date orderDate;
     private String status;

@@ -44,14 +44,14 @@
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/morris/morris.css" rel="stylesheet" type="text/css" />
-        <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-        <link href="css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-        <link href="css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-        <link href="css/iCheck/all.css" rel="stylesheet" type="text/css" />
-        <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link href="../css/morris/morris.css" rel="stylesheet" type="text/css" />
+        <link href="../css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <link href="../css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+        <link href="../css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />
+        <link href="../css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <link href="../css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <link href="../css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <!-- fullCalendar -->
         <link href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.css" rel="stylesheet" type="text/css" />
         <link href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print' />
@@ -105,7 +105,7 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <img src="img/profile.jpg" class="img-circle" alt="User Image" />
+                                    <img src="../img/profile.jpg" class="img-circle" alt="User Image" />
                                     <%if(acc != null) {%>
                                     <p>
                                     	<%if(acc.getUser_id() == 1){
@@ -125,7 +125,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="logout.jsp" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="../logout.jsp" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -142,7 +142,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="img/profile.jpg" class="img-circle" alt="User Image" />
+                            <img src="../img/profile.jpg" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                         <%if(acc != null) {%>
@@ -164,7 +164,7 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li>
-                            <a href="index.jsp">
+                            <a href="../index.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -212,7 +212,7 @@
                         <small>Control panel</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="index.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="../index.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li class="active">Job Allocate</li>
                     </ol>
                 </section>
@@ -361,35 +361,35 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="js/plugins/morris/morris.min.js" type="text/javascript"></script>
-        <script src="js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-        <script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-        <script src="js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
-        <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-        <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-        <script src="js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/morris/morris.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+        <script src="../js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+        <script src="../js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <script src="../js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
         
         <!-- drag and drop -->
-        <script src="js/dragadrop/redips-drag-source.js" type="text/javascript"></script>
+        <script src="../js/dragadrop/redips-drag-source.js" type="text/javascript"></script>
         
         <!-- fullCalendar -->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.min.js" type="text/javascript"></script>
         
         <!-- InputMask -->
-        <script src="js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
-        <script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
-        <script src="js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+        <script src="../js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+        <script src="../js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+        <script src="../js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
         
         <!-- DATA TABES SCRIPT -->
-        <script src="js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+        <script src="../js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="../js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
 
         <!-- AdminLTE App -->
-        <script src="js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="js/job_allocate.js" type="text/javascript"></script>
+        <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
+        <script src="../js/job_allocate.js" type="text/javascript"></script>
         <script type="text/javascript">
         	var array_userId = [];
         	<%for(int i =0; i< listAccountOfJob.size(); i++){%>

@@ -42,7 +42,7 @@ $(document).ready(function(){
                         if(role_id == 1){
                         	window.location = "../index.jsp";
                         }else{
-                        	window.location = "../index_engineer.jsp";
+                        	window.location = "../backup/index_engineer.jsp";
                         }
                     }else{
                     	$("#resultAlert").show();
