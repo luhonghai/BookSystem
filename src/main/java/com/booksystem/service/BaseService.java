@@ -5,6 +5,12 @@ import com.booksystem.entity.AbstractEntity;
 import com.booksystem.utils.JNDILookUpClass;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
+import org.apache.commons.io.FileUtils;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +19,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -194,5 +201,27 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
 
     public void setHttpResponse(HttpServletResponse response) {
         this.httpResponse = response;
+    }
+
+    protected Map<String, String> getFormData() throws IOException, FileUploadException {
+        Map<String, String> storePara = new HashMap<String, String>();
+        ServletFileUpload upload = new ServletFileUpload();
+
+        FileItemIterator iter = upload.getItemIterator(httpRequest);
+        while (iter.hasNext()) {
+            FileItemStream item = iter.next();
+            String name = item.getFieldName();
+            InputStream stream = item.openStream();
+            if (item.isFormField()) {
+                String value = Streams.asString(stream, "UTF-8");
+                storePara.put(name, value);
+            }else{
+                File tmpFile = new File(FileUtils.getTempDirectory(), UUID.randomUUID().toString() + "-upload-" + item.getName());
+                FileUtils.copyInputStreamToFile(stream, tmpFile);
+                logger.info("Save tmp file " + name + " to " + tmpFile);
+                storePara.put(name,tmpFile.getAbsolutePath());
+            }
+        }
+        return storePara;
     }
 }

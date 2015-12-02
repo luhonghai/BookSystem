@@ -38,12 +38,13 @@
   <div id="addPopup" style="display: none">
     <div class="box box-solid bg-light-blue">
       <div class="box-header" data-toggle="tooltip">
-        <h3 id="title_box" class="box-title">Thêm mới quản trị viên</h3>
+        <%--<h3 id="title_box" class="box-title">Thêm mới quản trị viên</h3>--%>
         <div class="box-tools pull-right">
           <button id="closePopup" class="btn btn-primary btn-xs"><i class="fa fa-times"></i></button>
         </div>
       </div>
       <div class="box-body">
+        <input type="hidden" name="txtId" id="txtId" value="0"/>
         <div class="form-group">
           <label for="txtUsername">Tên đăng nhập</label> <input
                 type="text" class="form-control" id="txtUsername">

@@ -1,3 +1,4 @@
+var entityName = 'admin';
 var myTable;
 
 function drawTable(){
@@ -9,7 +10,7 @@ function drawTable(){
         "bServerSide": true,
         "order": [[ 0, "desc" ]],
         "ajax": {
-            "url": CONTEXT_PATH + "/rest/admin/search",
+            "url": CONTEXT_PATH + "/rest/" + entityName + "/search",
             "type": "GET",
             "dataType": "json",
         },
@@ -53,9 +54,18 @@ function drawTable(){
     });
 }
 
+function resetForm() {
+    $('#txtUsername').val('');
+    $('#txtPassword').val('');
+    $('#txtFullname').val('');
+    $('#txtEmail').val('');
+    $('#txtId').val('0');
+}
+
 $(document).ready(function(){
     $('#btnSubmit').click(function() {
         putAdmin({
+            id: $('#txtId').val(),
             username: $('#txtUsername').val(),
             password: $('#txtPassword').val(),
             fullname: $('#txtFullname').val(),
@@ -63,12 +73,11 @@ $(document).ready(function(){
         });
     });
     $('#btnReset').click(function() {
-        $('#txtUsername').val('');
-        $('#txtPassword').val('');
-        $('#txtFullname').val('');
-        $('#txtEmail').val('');
+        resetForm();
     });
     $('#btnAdd').click(function() {
+        resetForm();
+        $('#btnSubmit').html('Thêm mới');
         $("#addPopup").slideDown();
     });
     $("#closePopup").click(function(){
@@ -80,7 +89,7 @@ $(document).ready(function(){
         var dataId = $target.attr("data-id");
         if ($target.hasClass("btn-delete")) {
             swal({
-                title: "Xóa quản trị viên?",
+                title: "Xóa đối tượng?",
                 text: null,
                 type: "warning",
                 showCancelButton: true,
@@ -90,7 +99,7 @@ $(document).ready(function(){
                 closeOnConfirm: false },
                 function() {
                     $.ajax({
-                        "url": CONTEXT_PATH + "/rest/admin/delete",
+                        "url": CONTEXT_PATH + "/rest/" + entityName + "/delete",
                         type: "POST",
                         dataType: "json",
                         data: {
@@ -112,7 +121,31 @@ $(document).ready(function(){
                 }
             );
         } else if ($target.hasClass("btn-edit")) {
-            //
+            $.ajax({
+                "url": CONTEXT_PATH + "/rest/" + entityName + "/get",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    id: dataId
+                },
+                success: function (data) {
+                    if (data.status) {
+                        $('#txtId').val(data.data.id);
+                        $('#txtUsername').val(data.data.username);
+                        $('#txtPassword').val('');
+                        $('#txtFullname').val(data.data.fullname);
+                        $('#txtEmail').val(data.data.email);
+                        $("#addPopup").slideDown();
+                        $('#btnSubmit').html('Cập nhật');
+                    } else {
+                        swal("Xảy ra lỗi!", data.message, "error");
+                    }
+                },
+                error: function () {
+                    swal("Xảy ra lỗi!", "Không thể kết nối tới máy chủ", "error");
+                }
+
+            });
         }
     });
 
@@ -121,7 +154,7 @@ $(document).ready(function(){
 
 function putAdmin(admin) {
     $.ajax({
-        url: CONTEXT_PATH + '/rest/admin/put',
+        url: CONTEXT_PATH + '/rest/' + entityName + '/put',
         method: 'POST',
         dataType: 'json',
         data: {
@@ -132,7 +165,7 @@ function putAdmin(admin) {
             if (data.status) {
                 myTable.fnDraw();
                 // saved successfully
-                swal("Thêm mới thành công!", null, "success");
+                swal( $('#btnSubmit').html() + " thành công!", null, "success");
             } else {
                 swal("Xảy ra lỗi!", data.message, "error");
             }

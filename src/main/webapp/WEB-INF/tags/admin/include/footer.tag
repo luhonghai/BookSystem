@@ -13,6 +13,7 @@
 <script src="<%=request.getContextPath()%>/admin/js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/admin/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/admin/js/plugins/bootstrap-fileinput/fileinput.min.js" type="text/javascript"></script>
 
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/admin/js/AdminLTE/app.js" type="text/javascript"></script>

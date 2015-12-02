@@ -8,4 +8,6 @@ public class Common {
     public static final String FIND_ALL = "findAll";
     public static final String LOGIN = "login";
     public static final String FIND_BY_EMAIL = "findByEmail";
+
+    public static final String IMAGES_DIR = "images";
 }

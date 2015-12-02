@@ -36,18 +36,17 @@ public class AdminService extends BaseService<IAdminDAO, Admin> {
         ResponseData<Admin> responseData = new ResponseData<Admin>();
         try {
             Admin entity = gson.fromJson(data, Admin.class);
+            entity.setPassword(MD5Helper.md5(entity.getPassword()));
             if (entity.getId() > 0) {
                 Admin old = dao.findOne(entity.getId());
                 if (old != null) {
-                    old.setEmail(entity.getEmail());
-                    old.setFullname(entity.getFullname());
-                    old.setUsername(entity.getUsername());
-                    responseData.setData(dao.update(old));
+                    responseData.setData(dao.update(entity));
+                    responseData.setStatus(true);
+                    responseData.setMessage("success");
                 } else {
                     responseData.setMessage("Invalid admin id " + entity.getId());
                 }
             } else {
-                entity.setPassword(MD5Helper.md5(entity.getPassword()));
                 responseData.setData(dao.save(entity));
                 responseData.setStatus(true);
                 responseData.setMessage("success");
@@ -72,6 +71,8 @@ public class AdminService extends BaseService<IAdminDAO, Admin> {
                 if (old != null) {
                     old.setPassword(MD5Helper.md5(entity.getPassword()));
                     responseData.setData(dao.update(old));
+                    responseData.setStatus(true);
+                    responseData.setMessage("success");
                 } else {
                     responseData.setMessage("Invalid admin id " + entity.getId());
                 }
@@ -126,8 +127,8 @@ public class AdminService extends BaseService<IAdminDAO, Admin> {
         ResponseData<Admin> responseData = new ResponseData<Admin>();
         Admin admin = getCurrentAdmin();
         if (admin != null) {
-            responseData.setStatus(true);
             responseData.setData(admin);
+            responseData.setStatus(true);
             responseData.setMessage("success");
         } else {
             responseData.setStatus(false);

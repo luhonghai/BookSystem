@@ -13,6 +13,7 @@
 <link href="<%=request.getContextPath()%>/admin/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/admin/css/bootstrap-fileinput/fileinput.min.css" rel="stylesheet" type="text/css" />
 <script>
     var CONTEXT_PATH = "<%=request.getContextPath()%>";
 </script>

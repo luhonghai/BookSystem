@@ -15,7 +15,20 @@ function drawTable(){
             "dataType": "json",
         },
 
-        "columns": [{
+        "columns": [
+            {
+                "data": null,
+                "bSortable": false,
+                "sDefaultContent": "",
+                "mRender": function (data, type, full) {
+                    var $div = $("<div/>");
+                    var $image = $(document.createElement("img"));
+                    $image.attr('src', CONTEXT_PATH + '/images/' + data.image);
+                    $image.css('width','70px');
+                    $div.append($image);
+                    return $div.html();
+                }
+            }, {
             "data": "title",
             "bSortable": true,
             "sDefaultContent": ""
@@ -63,22 +76,34 @@ function drawTable(){
     });
 }
 
+function clearForm() {
+    $('#txtTitle').val('');
+    $('#txtContent').val('');
+    $('#txtDescription').val('');
+    $('#txtAuthor').val('');
+    $('#txtPrice').val('');
+    $('#fileImage').fileinput('clear');
+    $("#txtId").val('0');
+}
+
 $(document).ready(function(){
+
+    $("#fileImage").fileinput({
+        showUpload : false,
+        allowedFileExtensions : ['jpg', 'png', 'gif']
+    });
+
     $('#btnSubmit').click(function() {
-        putEntity({
-            username: $('#txtUsername').val(),
-            password: $('#txtPassword').val(),
-            fullname: $('#txtFullname').val(),
-            email: $('#txtEmail').val(),
-        });
+        putEntity();
+        return false;
     });
     $('#btnReset').click(function() {
-        $('#txtUsername').val('');
-        $('#txtPassword').val('');
-        $('#txtFullname').val('');
-        $('#txtEmail').val('');
+        clearForm();
+        return false;
     });
     $('#btnAdd').click(function() {
+        clearForm();
+        $('#btnSubmit').html('Thêm mới');
         $("#addPopup").slideDown();
     });
     $("#closePopup").click(function(){
@@ -122,27 +147,59 @@ $(document).ready(function(){
                 }
             );
         } else if ($target.hasClass("btn-edit")) {
-            //
+            $.ajax({
+                "url": CONTEXT_PATH + "/rest/" + entityName + "/get",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    id: dataId
+                },
+                success: function (data) {
+                    if (data.status) {
+                        $('#txtId').val(data.data.id);
+                        $('#txtTitle').val(data.data.title);
+                        $('#txtContent').val(data.data.content);
+                        $('#txtDescription').val(data.data.description);
+                        $('#txtAuthor').val(data.data.author);
+                        $('#txtPrice').val(data.data.price);
+                        $('#fileImage').fileinput('clear');
+                        $("#addPopup").slideDown();
+                        $('#btnSubmit').html('Cập nhật');
+                    } else {
+                        swal("Xảy ra lỗi!", data.message, "error");
+                    }
+                },
+                error: function () {
+                    swal("Xảy ra lỗi!", "Không thể kết nối tới máy chủ", "error");
+                }
+
+            });
         }
     });
 
     drawTable();
 });
 
-function putEntity(entity) {
+function putEntity() {
+    var form = $("#uploadForm");
+    var formdata = false;
+    if (window.FormData) {
+        formdata = new FormData(form[0]);
+    }
     $.ajax({
-        url: CONTEXT_PATH + '/rest/' +  entityName + '/put',
-        method: 'POST',
-        dataType: 'json',
-        data: {
-            data: JSON.stringify(entity)
-        },
+        url: CONTEXT_PATH + '/rest/' +  entityName + '/put/upload',
+        type: "POST",
+        dataType: "json",
+        data: formdata ? formdata : form.serialize(),
+        cache: false,
+        contentType: false,
+        processData: false,
         success: function(data) {
             $("#addPopup").slideUp();
             if (data.status) {
                 myTable.fnDraw();
                 // saved successfully
-                swal("Thêm mới thành công!", null, "success");
+                swal($('#btnSubmit').html() + " thành công!", null, "success");
             } else {
                 swal("Xảy ra lỗi!", data.message, "error");
             }
