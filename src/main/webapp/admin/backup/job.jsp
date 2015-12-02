@@ -342,7 +342,7 @@
 
         <!-- AdminLTE App -->
         <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="../js/job.js" type="text/javascript"></script>
+        <script src="../js/backup/job.js" type="text/javascript"></script>
     </body>
 </html>
 <%}else{

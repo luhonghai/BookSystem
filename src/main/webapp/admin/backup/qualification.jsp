@@ -278,7 +278,7 @@
 
         <!-- AdminLTE App -->
         <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="../js/qualification.js" type="text/javascript"></script>
+        <script src="../js/backup/qualification.js" type="text/javascript"></script>
     </body>
 </html>
 <%}else{

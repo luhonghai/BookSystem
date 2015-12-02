@@ -1,3 +1,5 @@
+<%@ tag import="com.booksystem.service.AdminService" %>
+<%@ tag import="com.booksystem.entity.Admin" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
@@ -7,6 +9,13 @@
 <%@taglib prefix="include" tagdir="/WEB-INF/tags/admin/include" %>
 <%@attribute name="pageTitle" required="true" %>
 <%@attribute name="index"%>
+<%
+    AdminService adminService = new AdminService(request, response);
+    Admin admin = adminService.getCurrentAdmin();
+    if (admin == null) {
+        response.sendRedirect(request.getContextPath() + "/admin/login.jsp");
+    } else {
+%>
 <head>
     <include:head pageTitle="<%=pageTitle%>"/>
 </head>
@@ -22,3 +31,6 @@
 <include:footer/>
 </body>
 </html>
+<%
+    }
+%>

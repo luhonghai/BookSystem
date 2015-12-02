@@ -389,7 +389,7 @@
 
         <!-- AdminLTE App -->
         <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="../js/job_allocate.js" type="text/javascript"></script>
+        <script src="../js/backup/job_allocate.js" type="text/javascript"></script>
         <script type="text/javascript">
         	var array_userId = [];
         	<%for(int i =0; i< listAccountOfJob.size(); i++){%>

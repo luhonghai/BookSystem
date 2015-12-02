@@ -3,10 +3,6 @@ build/**
 dist/**
 target/**
 bin/**
-src/main/resources/**
-src/main/resources/META-INF/**
-src/test/resources/*
-src/test/resources/**
 .idea
 .idea/**
 .settings

@@ -1,18 +1,17 @@
 package com.booksystem.service;
 
 import com.booksystem.dao.IDAO;
-import com.booksystem.dao.IGalleryDAO;
 import com.booksystem.entity.AbstractEntity;
 import com.booksystem.utils.JNDILookUpClass;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import javax.ejb.EJB;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,7 +61,6 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
     protected Response createJSONResponse(Object object) {
         return Response.status(200)
                 .entity(object == null ? "{\"error\":\"null\"}" : gson.toJson(object))
-                //.encoding("UTF-8")
                 .build();
     }
 
@@ -71,12 +69,12 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
         return Response.status(200)
                 .entity(gson.toJson(objects, new TypeToken<Collection<T>>() {
                 }.getType()))
-                //.encoding("UTF-8")
                 .build();
     }
 
     @GET
     @Path("/list")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response list() {
         try {
             return createJSONResponse(dao.findAll());
@@ -88,6 +86,7 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
 
     @POST
     @Path("/delete")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response delete(@FormParam("id") int id) {
         ResponseData<Object> responseData = new ResponseData<Object>();
         try {
@@ -103,6 +102,7 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
 
     @POST
     @Path("/put")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response put(
             @FormParam("data")
             String data) {
@@ -114,6 +114,8 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
             } else {
                 responseData.setData((T) dao.save(entity));
             }
+            responseData.setStatus(true);
+            responseData.setMessage("success");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "could not put new entity",e);
             responseData.setMessage("Lỗi hệ thống");
@@ -123,6 +125,7 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
 
     @GET
     @Path("/get")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response get(
             @QueryParam("id")
             int id) {
@@ -136,5 +139,13 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
             responseData.setMessage("Lỗi hệ thống");
         }
         return createJSONResponse(responseData);
+    }
+
+    public void setHttpRequest(HttpServletRequest request) {
+        this.httpRequest = request;
+    }
+
+    public void setHttpResponse(HttpServletResponse response) {
+        this.httpResponse = response;
     }
 }

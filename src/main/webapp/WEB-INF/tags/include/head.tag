@@ -10,6 +10,9 @@
 <link href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="<%=request.getContextPath()%>/css/style.css" type="text/css" rel="stylesheet" media="all">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/flexslider.css" type="text/css" media="screen" />
+<script>
+    var CONTEXT_PATH ="<%=request.getContextPath()%>";
+</script>
 <!-- js -->
 <script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 <!-- //js -->

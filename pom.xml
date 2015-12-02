@@ -59,6 +59,11 @@
             <version>3.0.13.Final</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.3.3</version>
+        </dependency>
     </dependencies>
 
     <build>

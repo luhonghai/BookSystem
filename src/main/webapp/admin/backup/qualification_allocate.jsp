@@ -258,7 +258,7 @@
 
         <!-- AdminLTE App -->
         <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
-        <script src="../js/qualification_allocate.js" type="text/javascript"></script>
+        <script src="../js/backup/qualification_allocate.js" type="text/javascript"></script>
     </body>
 </html>
 <%}else{
