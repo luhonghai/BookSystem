@@ -60,4 +60,14 @@ public abstract class AbstractDAO<T, V> implements IDAO<T,V> {
         T object = getEm().find(targetClass, objectId);
         getEm().remove(object);
     }
+
+    @Override
+    public Collection<T> search(int start, int length, int column, String order, String search) {
+        return findAll();
+    }
+
+    @Override
+    public double searchCount(int start, int length, int column, String order, String search) {
+        return 10;
+    }
 }

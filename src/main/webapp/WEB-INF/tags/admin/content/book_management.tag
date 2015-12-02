@@ -1,12 +1,12 @@
 <%@tag pageEncoding="UTF-8" %>
 <section class="content-header">
   <h1>
-    Quản lí quản trị viên
+    Quản lí sách
     <small>Control panel</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="<%=request.getContextPath()%>/admin/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active">Quản trị viên</li>
+    <li class="active">Quản lí sách</li>
   </ol>
 </section>
 
@@ -16,16 +16,18 @@
     <div class="col-xs-12">
       <div class="box">
         <div>
-          <h3 class="box-title">Danh sách quản trị viên</h3>
+          <h3 class="box-title">Toàn bộ sách</h3>
           <a id="btnAdd" class="btn btn-social btn-primary"><i class="fa fa-plus"></i>Thêm mới</a>
         </div>
         <div class="box-body table-responsive">
           <table id="datatable" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>Tên đăng nhập</th>
-              <th>Họ và tên</th>
-              <th>Email</th>
+              <th>Tiêu đề</th>
+              <th>Tác giả</th>
+              <th>Mô tả</th>
+              <th>Nội dung</th>
+              <th>Giá</th>
               <th style="width:10%;"></th>
             </tr>
             </thead>
@@ -38,27 +40,31 @@
   <div id="addPopup" style="display: none">
     <div class="box box-solid bg-light-blue">
       <div class="box-header" data-toggle="tooltip">
-        <h3 id="title_box" class="box-title">Thêm mới quản trị viên</h3>
+        <h3 id="title_box" class="box-title">Thêm mới sách</h3>
         <div class="box-tools pull-right">
           <button id="closePopup" class="btn btn-primary btn-xs"><i class="fa fa-times"></i></button>
         </div>
       </div>
       <div class="box-body">
         <div class="form-group">
-          <label for="txtUsername">Tên đăng nhập</label> <input
-                type="text" class="form-control" id="txtUsername">
+          <label for="txtTitle">Tiêu đề</label> <input
+                type="text" class="form-control" id="txtTitle">
         </div>
         <div class="form-group">
-          <label for="txtPassword">Mật khẩu</label> <input
-                type="password" class="form-control" id="txtPassword">
+          <label for="txtAuthor">Tác giả</label> <input
+                type="text" class="form-control" id="txtAuthor">
         </div>
         <div class="form-group">
-          <label for="txtFullname">Họ tên</label> <input
-                type="text" class="form-control" id="txtFullname">
+          <label for="txtPrice">Giá</label> <input
+                type="text" class="form-control" id="txtPrice">
         </div>
         <div class="form-group">
-          <label for="txtEmail">Email</label> <input
-                type="email" class="form-control" id="txtEmail">
+          <label for="txtDescription">Mô tả</label> <textarea
+                 class="form-control" id="txtDescription"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="txtContent">Nội dung</label> <textarea
+                type="email" class="form-control" id="txtContent"></textarea>
         </div>
       </div>
       <div class="box-footer" style="border: 1px solid;border-color: #3c8dbc;">
@@ -68,4 +74,4 @@
     </div><!-- /.box -->
   </div>
 </section><!-- /.content -->
-<script src="<%=request.getContextPath()%>/admin/js/admin.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/admin/js/book.js" type="text/javascript"></script>

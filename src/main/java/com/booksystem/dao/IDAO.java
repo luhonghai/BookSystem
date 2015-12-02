@@ -7,16 +7,19 @@ import java.util.Collection;
  */
 public interface IDAO<T,V> {
 
-    public Collection<T> findAll();
+    Collection<T> findAll();
 
-    public T findOne(V keyValue);
+    T findOne(V keyValue);
 
-    public T save(T object) throws Exception;
+    T save(T object) throws Exception;
 
-    public T update(T object) throws Exception;
+    T update(T object) throws Exception;
 
-    public void delete(T object) throws Exception;
+    void delete(T object) throws Exception;
 
-    public void deleteById(V objectId) throws Exception;
+    void deleteById(V objectId) throws Exception;
 
+    Collection<T> search(int start, int length, int column, String order, String search);
+
+    double searchCount(int start, int length, int column, String order, String search);
 }

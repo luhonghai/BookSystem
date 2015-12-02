@@ -1,3 +1,4 @@
+<%@tag pageEncoding="UTF-8" %>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>

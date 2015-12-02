@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +39,15 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
     private String lookupName;
 
     protected D dao;
+
+    class SearchResponse {
+        int draw;
+        double recordsTotal;
+        double recordsFiltered;
+        Collection<T> data;
+        String message;
+        boolean status;
+    }
 
     public BaseService() {}
 
@@ -82,6 +92,43 @@ public abstract class BaseService<D extends IDAO, T extends AbstractEntity> {
             logger.log(Level.SEVERE, "could not list all entities", e);
             return createJSONResponse(null);
         }
+    }
+
+    @GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response search(
+            @QueryParam("start")
+            int start,
+            @QueryParam("length")
+            int length,
+            @QueryParam("order[0][column]")
+            int column,
+            @QueryParam("draw")
+            int draw,
+            @QueryParam("search[value]")
+            String search,
+            @QueryParam("order[0][dir]")
+            String order
+    ) {
+        logger.info("search datatable. Start: " + start + ". Length: " + length
+            + ". Column: " + column + ". Draw: "+ draw + ". Search: " + search + ". Order: " + order);
+        SearchResponse searchResponse = new SearchResponse();
+        searchResponse.draw = draw;
+        try {
+            searchResponse.data = dao.search(start, length, column, order, search);
+            double count = dao.searchCount(start, length, column, order, search);
+            searchResponse.recordsFiltered = count;
+            searchResponse.recordsTotal = count;
+            searchResponse.status = true;
+            searchResponse.message = "success";
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "could not list all entities", e);
+            searchResponse.status = false;
+            searchResponse.message = "Lỗi hệ thống";
+
+        }
+        return createJSONResponse(searchResponse);
     }
 
     @POST

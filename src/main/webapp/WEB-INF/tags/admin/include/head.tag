@@ -6,11 +6,13 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/morris/morris.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/admin/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/admin/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/admin/css/sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
 <script>
     var CONTEXT_PATH = "<%=request.getContextPath()%>";
 </script>

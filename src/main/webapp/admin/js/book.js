@@ -1,3 +1,4 @@
+var entityName = 'book';
 var myTable;
 
 function drawTable(){
@@ -9,25 +10,34 @@ function drawTable(){
         "bServerSide": true,
         "order": [[ 0, "desc" ]],
         "ajax": {
-            "url": CONTEXT_PATH + "/rest/admin/search",
+            "url": CONTEXT_PATH + "/rest/" +entityName+  "/search",
             "type": "GET",
             "dataType": "json",
         },
 
         "columns": [{
-            "data": "username",
+            "data": "title",
             "bSortable": true,
             "sDefaultContent": ""
 
         }, {
-            "data": "fullname",
+            "data": "author",
             "bSortable": true,
             "sDefaultContent": ""
         }, {
-            "data": "email",
+            "data": "description",
+            "bSortable": true,
+            "sDefaultContent": "",
+        },{
+            "data": "content",
             "bSortable": true,
             "sDefaultContent": "",
         },
+            {
+                "data": "price",
+                "bSortable": true,
+                "sDefaultContent": "",
+            },
             {
                 "data": null,
                 "bSortable": false,
@@ -55,7 +65,7 @@ function drawTable(){
 
 $(document).ready(function(){
     $('#btnSubmit').click(function() {
-        putAdmin({
+        putEntity({
             username: $('#txtUsername').val(),
             password: $('#txtPassword').val(),
             fullname: $('#txtFullname').val(),
@@ -80,7 +90,7 @@ $(document).ready(function(){
         var dataId = $target.attr("data-id");
         if ($target.hasClass("btn-delete")) {
             swal({
-                title: "Xóa quản trị viên?",
+                title: "Xóa đối tượng?",
                 text: null,
                 type: "warning",
                 showCancelButton: true,
@@ -90,7 +100,7 @@ $(document).ready(function(){
                 closeOnConfirm: false },
                 function() {
                     $.ajax({
-                        "url": CONTEXT_PATH + "/rest/admin/delete",
+                        "url": CONTEXT_PATH + "/rest/" + entityName + "/delete",
                         type: "POST",
                         dataType: "json",
                         data: {
@@ -119,13 +129,13 @@ $(document).ready(function(){
     drawTable();
 });
 
-function putAdmin(admin) {
+function putEntity(entity) {
     $.ajax({
-        url: CONTEXT_PATH + '/rest/admin/put',
+        url: CONTEXT_PATH + '/rest/' +  entityName + '/put',
         method: 'POST',
         dataType: 'json',
         data: {
-            data: JSON.stringify(admin)
+            data: JSON.stringify(entity)
         },
         success: function(data) {
             $("#addPopup").slideUp();

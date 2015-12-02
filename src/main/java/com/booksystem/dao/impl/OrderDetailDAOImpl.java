@@ -16,5 +16,4 @@ public class OrderDetailDAOImpl extends AbstractDAO<OrderDetail, Integer> implem
         super(OrderDetail.class);
     }
 
-
 }
