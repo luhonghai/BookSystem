@@ -4,6 +4,8 @@ import com.booksystem.constant.Common;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.Collection;
 
 /**
@@ -63,11 +65,18 @@ public abstract class AbstractDAO<T, V> implements IDAO<T,V> {
 
     @Override
     public Collection<T> search(int start, int length, int column, String order, String search) {
-        return findAll();
+        return getEm().createQuery("select e from " + targetClass.getSimpleName() + " e")
+                .setMaxResults(length)
+                .setFirstResult(start)
+                .getResultList();
     }
 
     @Override
     public double searchCount(int start, int length, int column, String order, String search) {
-        return 10;
+        final CriteriaBuilder builder = getEm().getCriteriaBuilder();
+        final CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
+        countQuery.select(builder.count(countQuery.from(targetClass)));
+        return getEm().createQuery(countQuery)
+                .getSingleResult();
     }
 }
