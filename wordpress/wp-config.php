@@ -23,13 +23,13 @@
 define('DB_NAME', 'wbs');
 
 /** MySQL database username */
-define('DB_USER', 'root');
+define('DB_USER', 'admin');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'admincmg@3f');
 
 /** MySQL hostname */
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'c-mg.vn');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
