@@ -100,7 +100,7 @@ $output = '<div class="l-titlebar' . $classes . '">';
 if ( ! empty( $bg_image ) ) {
 	$output .= '<div class="l-titlebar-img" style="background-image: url(' . $bg_image . ')"' . $bg_img_atts . '></div>';
 } else {
-	$output .= '<div class="l-titlebar-img" style="background-image: url(/wp-content/uploads/2014/01/bookshelf-banner.jpg)"></div>';
+	$output .= '<div class="l-titlebar-img" style="background-image: url(https://s3-ap-southeast-1.amazonaws.com/com-cmg-assets/images/bookshelf-banner.jpg)"></div>';
 }
 if ( ! empty( $overlay_color ) ) {
 	$output .= '<div class="l-titlebar-overlay" style="background-color:' . $overlay_color . ';opacity:' . $overlay_opacity . '"></div>';
