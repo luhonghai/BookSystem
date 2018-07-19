@@ -1,0 +1,9 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "wordpress/wp-content/plugins/Ultimate_VC_Addons/package.json"
+      ]
+    }
+  }
+}
